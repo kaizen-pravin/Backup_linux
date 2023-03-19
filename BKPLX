@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Configuration
+BACKUP_DIR="/path/to/backup/dir"
+SOURCE_DIR="/path/to/source/dir"
+FILENAME="backup-$(date +%Y-%m-%d-%H-%M-%S).tar.gz"
+EXCLUDE_FILE="/path/to/exclude/file"
+
+# Create backup directory if it doesn't exist
+mkdir -p $BACKUP_DIR
+
+# Change to source directory
+cd $SOURCE_DIR
+
+# Create backup archive using tar
+tar -czvf $BACKUP_DIR/$FILENAME -X $EXCLUDE_FILE .
+
+# Check if backup was successful
+if [ $? -eq 0 ]; then
+  echo "Backup successful: $BACKUP_DIR/$FILENAME"
+else
+  echo "Backup failed"
+fi
